@@ -25,7 +25,6 @@ class MyClient(discord.Client):
         print("Up and running!")
 
     async def on_message(self, message):
-
         if message.author.bot:
             if client.user in message.mentions:
                 await message.channel.send("Du scheinst ein Bot zu sein, deshalb wird meine Nachricht sofort wierder "
@@ -49,14 +48,13 @@ class MyClient(discord.Client):
                             value="Das ist normal. Wolfram Alpha braucht einen Moment um deine Ergebnisse zu berechnen "
                                   "genauso wie auf der Seite selbst",
                             inline=False)
-
             embed.add_field(name="Ich will den Bot auf meinem Server haben",
-                            value="checkout this Github Repository: https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot/",
+                            value="checkout this Github Repository: "
+                                  "https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot/",
                             inline=False)
             embed.set_footer(
-                text="Bot by TM#5784 Dieser Bot wird in keiner Weise von Wolfram Alpha oder Discord unterstützt und basiert "
-                     "nur auf der offiziellen Api")
-
+                text="Bot by TM#5784 Dieser Bot wird in keiner Weise von Wolfram Alpha oder Discord unterstützt und "
+                     "basiert nur auf der offiziellen Api")
             await message.channel.send(embed=embed)
             return
         elif message.content.lower().startswith("w|a "):
@@ -70,7 +68,7 @@ class MyClient(discord.Client):
                 als Platzhalter gedacht. Bitte selber vervollständigen wenn gewollt) Diese erscheinen nur in der 
                 Console und werden nicht geloggt, wer das für sinvoll hält kann es gerne ergänzen
                 """
-                print("Eine Anfrage aus der Sperrliste wurde von " + message.author + " versucht.")
+                print("Eine Anfrage aus der Sperrliste wurde von " + str(message.author) + " versucht.")
                 await message.channel.send("Diese Frage ist gesperrt. Vermutlich um die IP des Bots geheim zu halten. "
                                            "Deine Anfrage wird in der Console erscheinen")
                 return

@@ -4,7 +4,6 @@ from urllib import parse as urlparse
 import requests
 
 print("starting...")
-
 f = open("Discordtoken.txt", "r")
 DSTOKEN = str(f.read())
 f.close()
@@ -12,6 +11,7 @@ f = open("Wolframtoken.txt", "r")
 WATOKEN = str(f.read())
 f.close()
 WABASICURL = str("http://api.wolframalpha.com/v1/simple?appid=" + WATOKEN + "&i=")
+yourid = 0  # set your own id in order of providing the stop command
 
 
 class MyClient(discord.Client):
@@ -35,8 +35,7 @@ class MyClient(discord.Client):
                                            "I dont react to other bots, but you pinged me so you get this. "
                                            "Users please use w|a help", delete_after=20)
             return
-
-        if message.content.lower() == "w|a help":
+        elif message.content.lower() == "w|a help":
             """
             This is the Bots helppage. Please leave the Information about me as the author and my Github Repository
             """
@@ -50,7 +49,6 @@ class MyClient(discord.Client):
             embed.add_field(name="The Bot is slow",
                             value="That's normal. Wolfram Alpha needs its time to calculate and answer",
                             inline=False)
-            
             embed.add_field(name="I want that bot on my Server",
                             value="checkout this Github Repository: "
                                   "https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot/",
@@ -68,26 +66,28 @@ class MyClient(discord.Client):
             await message.add_reaction("✅")
             question = message.content
             question = question[4:]
+            if question.lower() in ["ip", "who am i"]:
+                """
+                banned questions (not all you should add, just as an example. In Order of protecting your ip
+                """
+                print("A blocked question was asked by " + str(message.author))
+                await message.channel.send("This question is blocked. Your trial was reported.")
+                return
             questionurl = str(WABASICURL + str(urlparse.quote(question)))
             r = requests.get(questionurl)
             if r.content == "Error 1: Invalid appid":
                 await message.channel.send("Wrong Appid")
             else:
                 await message.channel.send(file=discord.File(fp=io.BytesIO(r.content), filename="WolframAlphaBot.gif"))
-
             return
-
         elif client.user in message.mentions:
             await message.channel.send("My Prefix is w|a. I help you with Math by sending Wolfram "
                                        "Alpha answers. To get more info write w|a help")
-
-
-"""
-#set your own id as id in order of adding a stop command only you can use
-        elif message.author.id == id and message.content == "wabot stop":
+        # set your own id as id in order of adding a stop command only you can use
+        elif message.author.id == yourid and message.content == "wabot stop":
             print("Shutting Bot down...")
             await self.close()
-"""
+
 
 client = MyClient()
 client.run(DSTOKEN)
