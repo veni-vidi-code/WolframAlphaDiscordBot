@@ -17,6 +17,9 @@ WABASICURL = str("http://api.wolframalpha.com/v1/simple?appid=" + WATOKEN + "&i=
 class MyClient(discord.Client):
 
     async def on_ready(self):
+"""
+Start
+"""
         activity = discord.Game("w|a help")
         await self.change_presence(activity=activity)
         print("Up and running!")
@@ -34,6 +37,9 @@ class MyClient(discord.Client):
             return
 
         if message.content.lower() == "w|a help":
+"""
+This is the Bots helppage. Please leave the Information about me as the author and my Github Repository
+"""
             embed = discord.Embed(title="Wolfram|Alpha", url="https://wolframalpha.com",
                                   description="Bot der Wolfram Alpha Seiten direkt in Discord sendet", color=0xff0a0a)
             embed.set_author(name="TM#5784", url="https://github.com/The-Bow-Hunter")
