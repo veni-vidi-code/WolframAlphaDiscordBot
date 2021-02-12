@@ -18,7 +18,7 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         """
-        Start
+        Code executed
         """
         activity = discord.Game("w|a help")
         await self.change_presence(activity=activity)
@@ -27,13 +27,13 @@ class MyClient(discord.Client):
     async def on_message(self, message):
 
         if message.author.bot:
+            """
+            Reaction to other bots
+            """
             if client.user in message.mentions:
-                await message.channel.send("Du scheinst ein Bot zu sein, deshalb wird meine Nachricht sofort wierder "
-                                            "gelöscht werden. Ich reagiere nicht auf andere Bots. "
-                                            "(außer sie erwähnen mich wie du) Wenn ein Nutzer das lesen sollte "
-                                            "kann er mich "
-                                            "mit w|a help ansprechen", delete_after=20)
-
+                await message.channel.send("You seem to be a bot, so this is a self destrutive message. "
+                                           "I dont react to other bots, but you pinged me so you get this. "
+                                           "Users please use w|a help", delete_after=20)
             return
 
         if message.content.lower() == "w|a help":
@@ -41,49 +41,46 @@ class MyClient(discord.Client):
             This is the Bots helppage. Please leave the Information about me as the author and my Github Repository
             """
             embed = discord.Embed(title="Wolfram|Alpha", url="https://wolframalpha.com",
-                                  description="Bot der Wolfram Alpha Seiten direkt in Discord sendet", color=0xff0a0a)
+                                  description="Bot to answer questions with Wolfram Alpha", color=0xff0a0a)
             embed.set_author(name="TM#5784", url="https://github.com/The-Bow-Hunter")
             embed.set_thumbnail(url="https://www.wolframalpha.com/_next/static/images/Logo_3KbuDCMc.svg")
             embed.add_field(name="Prefix", value="w|a", inline=False)
-            embed.add_field(name="Nutzung", value="Schreibe einfach \"w|a \" (ohne Anführungszeichen) und dann den "
-                                                  "Befehl den du auch in Wolfram Alpha eingeben würdest", inline=False)
-            embed.add_field(name="Der Bot lädt lange",
-                            value="Das ist normal. Wolfram Alpha braucht einen Moment um deine Ergebnisse zu berechnen "
-                                  "genauso wie auf der Seite selbst",
+            embed.add_field(name="Usage", value="Simply write \"w|a \" (without \") and your question, "
+                                                "just as you would in WA. It may need some time.", inline=False)
+            embed.add_field(name="The Bot is slow",
+                            value="That's normal. Wolfram Alpha needs its time to calculate and answer",
                             inline=False)
             
-            embed.add_field(name="Ich will den Bot auf meinem Server haben",
-                            value="checkout this Github Repository: https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot/",
+            embed.add_field(name="I want that bot on my Server",
+                            value="checkout this Github Repository: "
+                                  "https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot/",
                             inline=False)
             embed.set_footer(
-                text="Bot by TM#5784 Dieser Bot wird in keiner Weise von Wolfram Alpha oder Discord unterstützt und basiert "
-                     "nur auf der offiziellen Api")
+                text="Bot by TM#5784 This Bot is a public script and is in no association with "
+                     "its author, Wolfram Alpha or Discord except that it uses its API")
 
             await message.channel.send(embed=embed)
             return
-
         elif message.content.lower().startswith("w|a "):
-
+            """
+            Main function
+            """
             await message.add_reaction("✅")
             question = message.content
             question = question[4:]
             questionurl = str(WABASICURL + str(urlparse.quote(question)))
-            embed = discord.Embed(title="Wolfram|Alpha", url="https://wolframalpha.com/",
-                                  description="Hier hast du deine Antwort von Wolfram Alpha")
-            embed.set_author(name="TM")
-            embed.set_footer(text="Bot by Tom")
             r = requests.get(questionurl)
             if r.content == "Error 1: Invalid appid":
                 await message.channel.send("Wrong Appid")
             else:
-                await message.channel.send(embed=embed)
                 await message.channel.send(file=discord.File(fp=io.BytesIO(r.content), filename="WolframAlphaBot.gif"))
 
             return
 
         elif client.user in message.mentions:
-            await message.channel.send("Mein Prefix ist w|a. Ich helfe bei Mathe indem ich Wolfram "
-                                       "Alpha Antworten sende. Wenn du mehr wissen willst schreibe bitte w|a help")
+            await message.channel.send("My Prefix is w|a. I help you with Math by sending Wolfram "
+                                       "Alpha answers. To get more info write w|a help")
+
 
 """
 #set your own id as id in order of adding a stop command only you can use
