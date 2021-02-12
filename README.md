@@ -21,7 +21,7 @@ Click the Sign up to get your first AppID button to start the app creation proce
 
 4. Your bot is set up now. Simply run either German.py for the German version or English.py for the English version. If you are using Terminal please start the programm out of the directory it is in in order of it being capable of reading the Tokens
 
-##FAQ
+## FAQ
 
 ### Why don't I host it public
 As mentioned earlier there are limited API calls for free. I want to safe mine for me and my friends. In Order of providing it to others i tried keeping the code as simple as possible (thats why i dont use the command extension) so everyone can read it in a minute to ensure it is safe. All I ask for you when using this code is to leave my name and this Github Repository on its helppage
