@@ -45,19 +45,12 @@ class MyClient(discord.Client):
                             value="Das ist normal. Wolfram Alpha braucht einen Moment um deine Ergebnisse zu berechnen "
                                   "genauso wie auf der Seite selbst",
                             inline=False)
-            embed.add_field(name="Der Bot läuft nicht mehr",
-                            value="Ich habe leider nur sehr wenige kostenlose Anfragen im Monat zur Verfügung. "
-                                  "Mir reichen die Kosten um den Bot laufen zu lassen, deshalb gibt es jedoch "
-                                  "irgendwann ein Ende",
-                            inline=False)
+            
             embed.add_field(name="Ich will den Bot auf meinem Server haben",
-                            value="Ich habe leider nur sehr wenige kostenlose Anfragen im Monat zur Verfügung. "
-                                  "Mir reichen die Kosten um den Bot laufen zu lassen. Um für meine eigenen Server "
-                                  "die Anfragen freizuhalten ist der Bot nicht öffentlich. "
-                                  "Wenn du es unbedingt willst kontaktiere mich persönlich",
+                            value="checkout this Github Repository: https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot/",
                             inline=False)
             embed.set_footer(
-                text="TM#5784 Dieser Bot wird in keiner Weise von Wolfram Alpha oder Discord unterstützt und basiert "
+                text="Bot by TM#5784 Dieser Bot wird in keiner Weise von Wolfram Alpha oder Discord unterstützt und basiert "
                      "nur auf der offiziellen Api")
 
             await message.channel.send(embed=embed)
@@ -84,10 +77,12 @@ class MyClient(discord.Client):
             await message.channel.send("Mein Prefix ist w|a. Ich helfe bei Mathe indem ich Wolfram "
                                        "Alpha Antworten sende. Wenn du mehr wissen willst schreibe bitte w|a help")
 
-        elif message.author.id == 444548735075352576 and message.content == "wabot stop":
+"""
+#set your own id as id in order of adding a stop command only you can use
+        elif message.author.id == id and message.content == "wabot stop":
             print("Shutting Bot down...")
             await self.close()
-
+"""
 
 client = MyClient()
 client.run(DSTOKEN)
