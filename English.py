@@ -4,14 +4,16 @@ from urllib import parse as urlparse
 import requests
 
 print("starting...")
-f = open("Discordtoken.txt", "r")
-DSTOKEN = str(f.read())
-f.close()
-f = open("Wolframtoken.txt", "r")
-WATOKEN = str(f.read())
-f.close()
+with open("Discordtoken.txt", "r") as f:
+    DSTOKEN = str(f.read())
+with open("Wolframtoken.txt", "r") as f:
+    WATOKEN = str(f.read())
 WABASICURL = str("http://api.wolframalpha.com/v1/simple?appid=" + WATOKEN + "&i=")
 yourid = 0  # set your own id in order of providing the stop command
+print("In order of your bot running correctly please ensure that your Tokens in Discordtoken.txt and Wolframtoken.txt "
+      "are correct. Your Bot might crash or be unable to answer otherwise. \nPlease also check out "
+      "https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot !\n---WolframAlphaDiscordBot by The_Bow_Hunter---")
+
 
 
 class MyClient(discord.Client):
