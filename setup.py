@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='WolframAlphaDiscordBot',
-    version='1.1',
+    version='0.2.1',
     packages=['WADiscordBot'],
     url='https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot',
     license='MIT',
