@@ -1,6 +1,6 @@
 import io
-import discord
 from urllib import parse as urlparse
+import discord
 import requests
 
 print("starting...")

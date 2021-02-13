@@ -11,5 +11,5 @@ setup(
     description='Easy to use and understand Wolfram Alpha Discord Bot using the Wolfram simple API',
     install_requires=['discord.py',
                       'requests'],
-    python_requires='>=3'
+    python_requires='>=3.5.3'
 )
