@@ -1,27 +1,29 @@
 import io
-import discord
+import json
 from urllib import parse as urlparse
+
+import discord
 import requests
 
 print("starting...")
-with open("Discordtoken.txt", "r") as f:
-    DSTOKEN = str(f.read())
-with open("Wolframtoken.txt", "r") as f:
-    WATOKEN = str(f.read())
-WABASICURL = str("http://api.wolframalpha.com/v1/simple?appid=" + WATOKEN + "&i=")
-yourid = 0  # set your own id in order of providing the stop command
+try:
+    with open("ConfigEnglishWADBOT.json", "r") as f:
+        CONFIG = json.load(f)
+except FileNotFoundError:
+    with open("ConfigEnglishWADBOT.json", "w") as f:
+        json.dump({'Wolfram_API_Token': 'YOURTOKEN', 'Discord_Bot_Token': 'YOURTOKEN',
+                   'YourDiscordId': '0', 'Banlist': ["ip", "who am i"]}, f)
+    raise Exception("Missing Config.json. I added it, please fill it out yourself! (Intended at first excecution)")
+WABASICURL = str("http://api.wolframalpha.com/v1/simple?appid=" + str(CONFIG['Wolfram_API_Token']) + "&i=")
 print("In order of your bot running correctly please ensure that your Tokens in Discordtoken.txt and Wolframtoken.txt "
       "are correct. Your Bot might crash or be unable to answer otherwise. \nPlease also check out "
       "https://github.com/The-Bow-Hunter/WolframAlphaDiscordBot !\n---WolframAlphaDiscordBot by The_Bow_Hunter---")
 
 
-
 class MyClient(discord.Client):
 
     async def on_ready(self):
-        """
-        Code executed
-        """
+        # Bot is now online
         activity = discord.Game("w|a help")
         await self.change_presence(activity=activity)
         print("Up and running!")
@@ -29,18 +31,14 @@ class MyClient(discord.Client):
     async def on_message(self, message):
 
         if message.author.bot:
-            """
-            Reaction to other bots
-            """
+            # Other Bots
             if client.user in message.mentions:
                 await message.channel.send("You seem to be a bot, so this is a self destrutive message. "
                                            "I dont react to other bots, but you pinged me so you get this. "
                                            "Users please use w|a help", delete_after=20)
             return
         elif message.content.lower() == "w|a help":
-            """
-            This is the Bots helppage. Please leave the Information about me as the author and my Github Repository
-            """
+            # This is the Bots helppage. Please leave the Information about me as the author and my Github Repository
             embed = discord.Embed(title="Wolfram|Alpha", url="https://wolframalpha.com",
                                   description="Bot to answer questions with Wolfram Alpha", color=0xff0a0a)
             embed.set_author(name="TM#5784", url="https://github.com/The-Bow-Hunter")
@@ -58,20 +56,15 @@ class MyClient(discord.Client):
             embed.set_footer(
                 text="Bot by TM#5784 This Bot is a public script and is in no association with "
                      "its author, Wolfram Alpha or Discord except that it uses its API")
-
             await message.channel.send(embed=embed)
             return
         elif message.content.lower().startswith("w|a "):
-            """
-            Main function
-            """
+            # Main Function
             await message.add_reaction("✅")
             question = message.content
             question = question[4:]
-            if question.lower() in ["ip", "who am i"]:
-                """
-                banned questions (not all you should add, just as an example. In Order of protecting your ip
-                """
+            if question.lower() in CONFIG["Banlist"]:
+                # banned questions (not all you should add, just as an example). In Order of protecting your ip
                 print("A blocked question was asked by " + str(message.author))
                 await message.channel.send("This question is blocked. Your trial was reported.")
                 return
@@ -86,10 +79,10 @@ class MyClient(discord.Client):
             await message.channel.send("My Prefix is w|a. I help you with Math by sending Wolfram "
                                        "Alpha answers. To get more info write w|a help")
         # set your own id as id in order of adding a stop command only you can use
-        elif message.author.id == yourid and message.content == "wabot stop":
+        elif message.author.id == CONFIG["YourDiscordId"] and message.content == "wabot stop":
             print("Shutting Bot down...")
             await self.close()
 
 
 client = MyClient()
-client.run(DSTOKEN)
+client.run(CONFIG["Discord_Bot_Token"])
