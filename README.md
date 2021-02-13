@@ -10,18 +10,24 @@ This is an very simple script you can use in order of running a Discord Bot whic
 - discord.py (If it is your own computer "pip3 install discord.py" or "pip install discord.py" should work. If it isn't i assume you know a bit about python and your system. You can look in the [discord.py docs](https://discordpy.readthedocs.io/en/latest/intro.html#installing))
 
 ## Setting up the Bot
-1. Clone this Repository to your system
-
-2. Get yourself a Discord Bot token and paste it in [Discordtoken.txt](/Discordtoken.txt). You can alrady Invite your Bot to your server now (but it is just offline so far)
+1. Chose your language and download the script. You might wanna read it, it is less than a 100 lines.
+2. Run the script once. You will get an error message. There should be either a ConfigGermanWADBOT.json or ConfigEnglishWADBOT.json file now.
+3. Get yourself a Discord Bot token and replace YOURTOKEN in the config file with it (After Discord_bot_Token. Leave it in between "). You can alrady Invite your Bot to your server now (but it is just offline so far)
 A tutorial how to create a discord Bot, get its Token and later invite it to your Server you can find at [the offical discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html)
-
-3. [Register for a Wolfram Alpha Api Acces.](https://products.wolframalpha.com/api/) Please notice that there is only a limited amount of calls per month for free. 
+4. [Register for a Wolfram Alpha Api Acces.](https://products.wolframalpha.com/api/) Please notice that there is only a limited amount of calls per month for free. 
 To get started, you must register a Wolfram ID and sign in to the Wolfram|Alpha Developer Portal. Upon logging in, go to the My Apps tab to start creating your first app.
-Click the Sign up to get your first AppID button to start the app creation process. After a one-time survey about intended usage, the AppID creation dialog will appear. Give your application a name and a simple description to register an AppID. Take this Appid and put it into [Wolframtoken.txt](/Wolframtoken.txt)
-
-4. Your bot is set up now. Simply run either German.py for the German version or English.py for the English version. If you are using Terminal please start the programm out of the directory it is in in order of it being capable of reading the Tokens
+Click the Sign up to get your first AppID button to start the app creation process. After a one-time survey about intended usage, the AppID creation dialog will appear. Give your application a name and a simple description to register an AppID. Take this Appid and replace YOURTOKEN after Wolfram_API_Token in your config file with it. (remember to leave the """)
+5. Your bot is set up now. Simply run the script again and talk to it. Please remember that you have to restart it after every system shutdown so you might wanna add it to your Autostart
 
 ## FAQ
+
+### I get an Error
+Most commonly you made a mistake in your Config json file. Simply delete it and redo the setup.
+Other reasons might be a missing internet connection, missing permissions to read/write files, a wrong token or simular
+If it isn't of that kind please create an Issue
+
+### I dont get a picture
+Check you Wolfram API Token again. Is it correct and has it requests left? Otherwise create an Issue here
 
 ### Why don't I host it public
 As mentioned earlier there are limited API calls for free. I want to safe mine for me and my friends. In Order of providing it to others i tried keeping the code as simple as possible (thats why i dont use the command extension) so everyone can read it in a minute to ensure it is safe. All I ask for you when using this code is to leave my name and this Github Repository on its helppage
