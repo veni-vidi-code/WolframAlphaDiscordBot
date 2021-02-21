@@ -3,6 +3,7 @@
 ## What is this?
 
 This is an very simple script you can use in order of running a Discord Bot which is capable of taking a user send question and answering with an image of the answer by Wolfram Alpha
+There is also a cog if you already have a bot and want to just add a cog
 
 ## Prerequisites
 
@@ -10,7 +11,9 @@ This is an very simple script you can use in order of running a Discord Bot whic
 - discord.py (If it is your own computer "pip3 install discord.py" or "pip install discord.py" should work. If it isn't i assume you know a bit about python and your system. You can look in the [discord.py docs](https://discordpy.readthedocs.io/en/latest/intro.html#installing))
 
 ## Setting up the Bot
-1. Chose your language and download the script. You might wanna read it, it is less than a 100 lines.
+
+### As a standalone bot
+1. Chose your language and download the script (English.py or German.py). You might wanna read it, it is less than a 100 lines.
 2. Run the script once. You will get an error message. There should be either a ConfigGermanWADBOT.json or ConfigEnglishWADBOT.json file now.
 3. Get yourself a Discord Bot token and replace YOURTOKEN in the config file with it (After Discord_bot_Token. Leave it in between "). You can alrady Invite your Bot to your server now (but it is just offline so far)
 A tutorial how to create a discord Bot, get its Token and later invite it to your Server you can find at [the offical discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html)
@@ -18,6 +21,17 @@ A tutorial how to create a discord Bot, get its Token and later invite it to you
 To get started, you must register a Wolfram ID and sign in to the Wolfram|Alpha Developer Portal. Upon logging in, go to the My Apps tab to start creating your first app.
 Click the Sign up to get your first AppID button to start the app creation process. After a one-time survey about intended usage, the AppID creation dialog will appear. Give your application a name and a simple description to register an AppID. Take this Appid and replace YOURTOKEN after Wolfram_API_Token in your config file with it. (remember to leave the """)
 5. Your bot is set up now. Simply run the script again and talk to it. Please remember that you have to restart it after every system shutdown so you might wanna add it to your Autostart
+
+### As an addition to an already existing bot using the discord.ext.commands extension
+1. Simply import the Script (Ending with Cog), import it via `from WolframAlphaCog import WolframAlpha` (dont forget to change it to your directory). 
+
+2. [Register for a Wolfram Alpha Api Acces.](https://products.wolframalpha.com/api/) Please notice that there is only a limited amount of calls per month for free. 
+To get started, you must register a Wolfram ID and sign in to the Wolfram|Alpha Developer Portal. Upon logging in, go to the My Apps tab to start creating your first app.
+Click the Sign up to get your first AppID button to start the app creation process. After a one-time survey about intended usage, the AppID creation dialog will appear. Give your application a name and a simple description to register an AppID.
+
+3. Add the cog to your bot via `bot.add_cog(WolframAlpha(bot, "YOUR WOLFRAMAPI TOKEN"))`.
+
+4. It just needs the Intends messages and guilds in order of receiving and sending messages
 
 ## FAQ
 
